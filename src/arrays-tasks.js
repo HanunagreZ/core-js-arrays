@@ -183,8 +183,7 @@ function insertItem(arr, item, index) {
  */
 function getHead(arr, n) {
   const headArr = [...arr];
-  headArr.length = n;
-  return headArr;
+  return headArr.slice(0, n);
 }
 
 /**
@@ -219,8 +218,10 @@ function getTail(arr, n) {
  *    doubleArray([]) => []
  */
 function doubleArray(arr) {
-  const doubledArr = [...arr, ...arr];
-  return doubledArr;
+  const doubledArr1 = [...arr];
+  const doubledArr2 = [...arr];
+  const doubledArr3 = doubledArr1.concat(doubledArr2);
+  return doubledArr3;
 }
 
 /**
