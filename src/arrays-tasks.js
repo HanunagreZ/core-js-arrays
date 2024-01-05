@@ -461,8 +461,8 @@ function findAllOccurrences(arr, item) {
  *    [1, 2, 3, 4, 5]                   => '1,2,3,4,5'
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  return arr.join(',');
 }
 
 /**
@@ -491,8 +491,23 @@ function toStringList(/* arr */) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  const countryArr = [...arr];
+  return countryArr.sort((a, b) => {
+    if (a.country < b.country) {
+      return -1;
+    }
+    if (a.country > b.country) {
+      return 1;
+    }
+    if (a.city < b.city) {
+      return -1;
+    }
+    if (a.city > b.city) {
+      return 1;
+    }
+    return 0;
+  });
 }
 
 /**
@@ -612,8 +627,12 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  if (indexes.length === 0) {
+    return arr;
+  }
+  const [index, ...rest] = indexes;
+  return getElementByIndexes(arr[index], rest);
 }
 
 /**
@@ -634,8 +653,22 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (arr.length % 2 === 0) {
+    const firstHalf = arr.slice(0, arr.length / 2);
+    const secondHalf = arr.slice(arr.length / 2);
+    secondHalf.push(firstHalf);
+    return secondHalf.flat();
+  }
+  if (arr.length % 2 !== 0) {
+    const firstHalf = arr.slice(0, arr.length / 2);
+    const middle = arr.slice(arr.length / 2, arr.length / 2 + 1);
+    const secondHalf = arr.slice(arr.length / 2 + 1);
+    secondHalf.push(middle);
+    secondHalf.push(firstHalf);
+    return secondHalf.flat();
+  }
+  return arr;
 }
 
 module.exports = {
