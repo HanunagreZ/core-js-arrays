@@ -20,8 +20,14 @@
  *    getIntervalArray(0, 100) => [ 0, 1, 2, ..., 100 ]
  *    getIntervalArray(3, 3) => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const range = (startX, stopX, step) =>
+    Array.from(
+      { length: (stopX - startX) / step + 1 },
+      (_, i) => startX + i * step
+    );
+  const qq = range(start, end, 1);
+  return qq;
 }
 
 /**
@@ -122,8 +128,18 @@ function getStringsLength(arr) {
  *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
-function getAverage(/* arr */) {
-  throw new Error('Not implemented');
+function getAverage(arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  const averageArr = arr.reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+  const average = averageArr / arr.length;
+  if (Number.isInteger(average)) {
+    return average;
+  }
+  return +average.toFixed(2);
 }
 
 /**
@@ -136,8 +152,10 @@ function getAverage(/* arr */) {
  *    isSameLength(['orange', 'banana', 'cherry']) => true
  *    isSameLength(['cat', 'dog', 'elephant']) => false
  */
-function isSameLength(/* arr */) {
-  throw new Error('Not implemented');
+function isSameLength(arr) {
+  const stringLength = (currentValue) => currentValue.length === arr[0].length;
+  const bul = arr.every(stringLength);
+  return bul;
 }
 
 /**
@@ -151,8 +169,10 @@ function isSameLength(/* arr */) {
  *    isValueEqualsIndex([2, 1, 0, 4, 5]) => true
  *    isValueEqualsIndex([10, 20, 30, 40, 50]) => false
  */
-function isValueEqualsIndex(/* arr */) {
-  throw new Error('Not implemented');
+function isValueEqualsIndex(arr) {
+  const haveValue = (element, index) => element === index;
+  const bulArr = arr.some(haveValue);
+  return bulArr;
 }
 
 /**
@@ -251,8 +271,10 @@ function toStringList(arr) {
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const setFromArr = new Set(arr);
+  const arrFromSet = Array.from(setFromArr);
+  return arrFromSet;
 }
 
 /**
@@ -268,8 +290,35 @@ function distinct(/* arr */) {
  *    createNDimensionalArray(4, 2) => [[[[0, 0], [0, 0]], [[0, 0], [0, 0]]], [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]]
  *    createNDimensionalArray(1, 1) => [0]
  */
-function createNDimensionalArray(/* n, size */) {
-  throw new Error('Not implemented');
+function createNDimensionalArray(n, size) {
+  let finishArr;
+  if (n === 1) {
+    const arr = new Array(size).fill(0);
+    finishArr = arr;
+  }
+  if (n === 2) {
+    const arr = new Array(size).fill([]).map(() => new Array(size).fill(0));
+    finishArr = arr;
+  }
+  if (n === 3) {
+    const arr = new Array(size)
+      .fill([])
+      .map(() => new Array(size).fill([]).map(() => new Array(size).fill(0)));
+    finishArr = arr;
+  }
+  if (n === 4) {
+    const arr = new Array(size)
+      .fill([])
+      .map(() =>
+        new Array(size)
+          .fill([])
+          .map(() =>
+            new Array(size).fill([]).map(() => new Array(size).fill(0))
+          )
+      );
+    finishArr = arr;
+  }
+  return finishArr;
 }
 
 /**
@@ -300,8 +349,9 @@ function flattenArray(nestedArray) {
  *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  const flatMap = arr.flatMap(childrenSelector);
+  return flatMap;
 }
 
 /**
@@ -317,8 +367,13 @@ function selectMany(/* arr, childrenSelector */) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  const leftBalance = arr[0][0] - arr[0][1];
+  const rightBalance = arr[1][0] - arr[1][1];
+  return leftBalance + rightBalance;
 }
 
 /**
