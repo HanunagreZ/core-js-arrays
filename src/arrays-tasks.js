@@ -43,8 +43,19 @@ function getIntervalArray(start, end) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  let summArr;
+  if (arr1.length >= arr2.length) {
+    summArr = arr1.map((elem, index) =>
+      Number.isNaN(elem + arr2[index]) ? elem : elem + arr2[index]
+    );
+  }
+  if (arr2.length > arr1.length) {
+    summArr = arr2.map((elem, index) =>
+      Number.isNaN(elem + arr1[index]) ? elem : elem + arr1[index]
+    );
+  }
+  return summArr;
 }
 
 /**
@@ -388,8 +399,15 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const chunkArr = arr.reduce((acc, val, i) => {
+    if (i % chunkSize === 0) {
+      acc.push([]);
+    }
+    acc[acc.length - 1].push(val);
+    return acc;
+  }, []);
+  return chunkArr;
 }
 
 /**
@@ -423,8 +441,18 @@ function generateOdds(len) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  let returnedEl;
+  if (indices.length === 1) {
+    returnedEl = arr[`${indices[0]}`];
+  }
+  if (indices.length === 2) {
+    returnedEl = arr[`${indices[0]}`][`${indices[1]}`];
+  }
+  if (indices.length === 3) {
+    returnedEl = arr[`${indices[0]}`][`${indices[1]}`][`${indices[2]}`];
+  }
+  return returnedEl;
 }
 
 /**
@@ -491,8 +519,11 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  const hexArr = arr.map((x) =>
+    Number(x).toString(16).toUpperCase().padStart(6, '0').padStart(7, '#')
+  );
+  return hexArr;
 }
 
 /**
@@ -509,8 +540,83 @@ function getHexRGBValues(/* arr */) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  const arrq = [...arr];
+  if (arrq.length === 0) {
+    return arrq;
+  }
+  const topArr = [];
+  if (n === 1) {
+    const firstMax = Math.max(...arrq);
+    topArr.push(firstMax);
+    const firstIndex = arrq.indexOf(firstMax);
+    arrq.splice(firstIndex, 1);
+  }
+  if (n === 2) {
+    const firstMax = Math.max(...arrq);
+    topArr.push(firstMax);
+    const firstIndex = arrq.indexOf(firstMax);
+    arrq.splice(firstIndex, 1);
+    const secondMax = Math.max(...arrq);
+    topArr.push(secondMax);
+    const secondIndex = arrq.indexOf(secondMax);
+    arrq.splice(secondIndex, 1);
+  }
+  if (n === 3) {
+    const firstMax = Math.max(...arrq);
+    topArr.push(firstMax);
+    const firstIndex = arrq.indexOf(firstMax);
+    arrq.splice(firstIndex, 1);
+    const secondMax = Math.max(...arrq);
+    topArr.push(secondMax);
+    const secondIndex = arrq.indexOf(secondMax);
+    arrq.splice(secondIndex, 1);
+    const thirdMax = Math.max(...arrq);
+    topArr.push(thirdMax);
+    const thirdIndex = arrq.indexOf(thirdMax);
+    arrq.splice(thirdIndex, 1);
+  }
+  if (n === 4) {
+    const firstMax = Math.max(...arrq);
+    topArr.push(firstMax);
+    const firstIndex = arrq.indexOf(firstMax);
+    arrq.splice(firstIndex, 1);
+    const secondMax = Math.max(...arrq);
+    topArr.push(secondMax);
+    const secondIndex = arrq.indexOf(secondMax);
+    arrq.splice(secondIndex, 1);
+    const thirdMax = Math.max(...arrq);
+    topArr.push(thirdMax);
+    const thirdIndex = arrq.indexOf(thirdMax);
+    arrq.splice(thirdIndex, 1);
+    const fourthMax = Math.max(...arrq);
+    topArr.push(fourthMax);
+    const fourthIndex = arrq.indexOf(fourthMax);
+    arrq.splice(fourthIndex, 1);
+  }
+  if (n === 5) {
+    const firstMax = Math.max(...arrq);
+    topArr.push(firstMax);
+    const firstIndex = arrq.indexOf(firstMax);
+    arrq.splice(firstIndex, 1);
+    const secondMax = Math.max(...arrq);
+    topArr.push(secondMax);
+    const secondIndex = arrq.indexOf(secondMax);
+    arrq.splice(secondIndex, 1);
+    const thirdMax = Math.max(...arrq);
+    topArr.push(thirdMax);
+    const thirdIndex = arrq.indexOf(thirdMax);
+    arrq.splice(thirdIndex, 1);
+    const fourthMax = Math.max(...arrq);
+    topArr.push(fourthMax);
+    const fourthIndex = arrq.indexOf(fourthMax);
+    arrq.splice(fourthIndex, 1);
+    const fifthMax = Math.max(...arrq);
+    topArr.push(fifthMax);
+    const fifthIndex = arrq.indexOf(fifthMax);
+    arrq.splice(fifthIndex, 1);
+  }
+  return topArr;
 }
 
 /**
