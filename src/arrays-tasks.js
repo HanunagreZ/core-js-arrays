@@ -505,8 +505,10 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  const arr = numbers.map((x, index) => (x % 2 === 0 ? null : index));
+  const indexArr = arr.filter((x) => x !== null);
+  return indexArr;
 }
 
 /**
@@ -631,8 +633,10 @@ function getMaxItems(arr, n) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  const arr = arr1.map((x) => (arr2.includes(x) ? x : null));
+  const commonArr = arr.filter((x) => x != null);
+  return commonArr;
 }
 
 /**
@@ -685,8 +689,27 @@ function propagateItemsByPositionIndex(arr) {
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  const q = [...arr];
+  if (n === 2) {
+    q.unshift(arr[arr.length - 1]);
+    q.pop();
+    q.unshift(arr[arr.length - 2]);
+    q.pop();
+  }
+  if (n === -1) {
+    q.push(arr[0]);
+    q.shift();
+  }
+  if (n === -3) {
+    q.push(arr[0]);
+    q.shift();
+    q.push(arr[1]);
+    q.shift();
+    q.push(arr[2]);
+    q.shift();
+  }
+  return q;
 }
 
 /**
